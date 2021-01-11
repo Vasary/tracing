@@ -6,7 +6,7 @@
          stopOnFailure="false">
     <coverage>
         <report>
-            <clover outputFile="./clover.xml"/>
+            <clover outputFile="clover.xml"/>
         </report>
     </coverage>
     <testsuites>
@@ -15,8 +15,8 @@
         </testsuite>
     </testsuites>
     <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src</directory>
+        <whitelist>
+            <directory>src</directory>
         </whitelist>
     </filter>
 </phpunit>
