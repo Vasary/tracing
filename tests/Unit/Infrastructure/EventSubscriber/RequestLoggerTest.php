@@ -69,11 +69,10 @@ final class RequestLoggerTest extends TestCase
      */
     public function notMasterRequest(): void
     {
-        $generator = $this->getTraceIdGeneratorMock(0);
+        $generator = $this->getTraceIdGeneratorMock(1);
         $subscriber = new RequestLogger($generator, new NullLogger(), self::HEADER);
 
         $event = $this->getRequestEvent(HttpKernelInterface::SUB_REQUEST);
-
         $subscriber->onKernelRequest($event);
 
         self::assertArrayNotHasKey(mb_strtolower(self::HEADER), $event->getRequest()->headers->all());
