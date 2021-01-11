@@ -15,4 +15,4 @@ script:
   - vendor/bin/phpunit
 
 after_success:
-  - ls -lah
+  - bash <(curl -s https://codecov.io/bash)
