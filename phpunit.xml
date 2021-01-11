@@ -4,19 +4,24 @@
          backupGlobals="false" backupStaticAttributes="false" colors="true" convertErrorsToExceptions="true"
          convertNoticesToExceptions="true" convertWarningsToExceptions="true" processIsolation="false"
          stopOnFailure="false">
-    <coverage>
+    <coverage
+            includeUncoveredFiles="true"
+            processUncoveredFiles="true"
+            pathCoverage="false"
+            ignoreDeprecatedCodeUnits="true"
+            disableCodeCoverageIgnore="true"
+    >
         <report>
             <clover outputFile="clover.xml"/>
         </report>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
     </coverage>
+
     <testsuites>
-        <testsuite name="Test Suite">
+        <testsuite name="Unit">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist>
-            <directory>src</directory>
-        </whitelist>
-    </filter>
 </phpunit>
