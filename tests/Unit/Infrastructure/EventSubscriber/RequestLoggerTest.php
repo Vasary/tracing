@@ -65,6 +65,7 @@ final class RequestLoggerTest extends TestCase
     }
 
     /**
+     * @test
      */
     public function notMasterRequest(): void
     {
