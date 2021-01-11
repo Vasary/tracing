@@ -1,7 +1,7 @@
 {
   "name": "vasary/x-trace-id",
   "description": "Simple x-request-id trace kit",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "keywords": [
     "trace",
     "request-id",

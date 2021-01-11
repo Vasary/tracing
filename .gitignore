@@ -1,4 +1,3 @@
 .phpunit.result.cache
 .idea
 vendor
-.php_cs.cache
