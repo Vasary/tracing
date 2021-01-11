@@ -1,6 +1,7 @@
 {
   "name": "vasary/x-trace-id",
   "description": "Simple x-request-id trace kit",
+  "version": "0.1.0",
   "keywords": [
     "trace",
     "request-id",
@@ -16,7 +17,7 @@
   ],
   "minimum-stability": "stable",
   "require": {
-    "php": "^7.4",
+    "php": "^7.4 || ^8.0",
     "monolog/monolog": "^2.0.0",
     "psr/log": "*",
     "symfony/event-dispatcher": "5.*",
