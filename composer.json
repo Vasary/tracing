@@ -8,7 +8,7 @@
     "opentracing"
   ],
   "type": "library",
-  "license": "BSD",
+  "license": "0BSD",
   "authors": [
     {
       "name": "Viktor Gievoi",
