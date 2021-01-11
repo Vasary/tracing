@@ -21,6 +21,18 @@ final class ResponseLoggerTest extends TestCase
     /**
      * @test
      */
+    public function subscriberParameters(): void
+    {
+        $events = ResponseLogger::getSubscribedEvents();
+
+        self::assertIsArray($events);
+        self::assertArrayHasKey('kernel.response', $events);
+        self::assertLessThan(0, $events['kernel.response'][1]);
+    }
+
+    /**
+     * @test
+     */
     public function success(): void
     {
         $responseSubscriber =

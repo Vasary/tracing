@@ -23,6 +23,18 @@ final class RequestLoggerTest extends TestCase
     /**
      * @test
      */
+    public function subscriberParameters(): void
+    {
+        $events = RequestLogger::getSubscribedEvents();
+
+        self::assertIsArray($events);
+        self::assertArrayHasKey('kernel.request', $events);
+        self::assertGreaterThan(0, $events['kernel.request'][1]);
+    }
+
+    /**
+     * @test
+     */
     public function set(): void
     {
         $generator = $this->getTraceIdGeneratorMock(1);
