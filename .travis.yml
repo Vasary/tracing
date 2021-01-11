@@ -2,6 +2,7 @@ language: php
 env:
   global:
     - XDEBUG_MODE=coverage
+    - CODECOV_TOKEN=69603dfb-4614-4c46-981d-fea1bf942272
 
 php:
   - 7.4
@@ -12,3 +13,6 @@ before_script:
 
 script:
   - vendor/bin/phpunit
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
