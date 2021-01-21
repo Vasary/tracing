@@ -5,6 +5,7 @@ env:
     - CODECOV_TOKEN=69603dfb-4614-4c46-981d-fea1bf942272
 
 php:
+  - 7.0
   - 7.1
   - 7.2
   - 7.3
