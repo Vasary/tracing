@@ -18,14 +18,14 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=7.1",
-    "monolog/monolog": "^2.0.0",
+    "monolog/monolog": ">=1.26",
     "psr/log": "*",
     "symfony/event-dispatcher": "5.*||4.*||3.4.*",
     "symfony/http-foundation": "5.*||4.*||3.4.*",
     "symfony/http-kernel": "5.*||4.*||3.4.*"
   },
   "require-dev": {
-    "phpunit/php-code-coverage": "^9.2||^8||^7",
+    "phpunit/php-code-coverage": "^9||^8||^7||^6",
     "phpunit/phpunit": "^9||^8||^7"
   },
   "config": {
