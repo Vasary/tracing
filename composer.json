@@ -17,17 +17,16 @@
   ],
   "minimum-stability": "stable",
   "require": {
-    "php": "^7.1 || ^8.0",
+    "php": ">=7.1",
     "monolog/monolog": "^2.0.0",
     "psr/log": "*",
-    "symfony/event-dispatcher": "5.*",
-    "symfony/http-foundation": "5.*",
-    "symfony/http-kernel": "5.*"
+    "symfony/event-dispatcher": "5.*||4.*||3.4.*",
+    "symfony/http-foundation": "5.*||4.*||3.4.*",
+    "symfony/http-kernel": "5.*||4.*||3.4.*"
   },
   "require-dev": {
-    "phpstan/phpstan": "^0.12.64",
-    "phpunit/php-code-coverage": "^9.2",
-    "phpunit/phpunit": "^9"
+    "phpunit/php-code-coverage": "^9.2||^8||^7",
+    "phpunit/phpunit": "^9||^8||^7"
   },
   "config": {
     "optimize-autoloader": true,
