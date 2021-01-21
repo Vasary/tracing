@@ -7,9 +7,9 @@ use Vasary\XTraceId\Domain\LoggerProcessor\LoggerProcessorInterface;
 
 final class TraceIdProcessor implements LoggerProcessorInterface
 {
-    private TraceIdGeneratorInterface $generator;
+    private $generator;
 
-    private string $fieldName;
+    private $fieldName;
 
     public function __construct(TraceIdGeneratorInterface $generator, string $fieldName)
     {

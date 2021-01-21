@@ -9,11 +9,11 @@ use Vasary\XTraceId\Domain\Generator\TraceIdGeneratorInterface;
 
 abstract class AbstractLogger
 {
-    protected TraceIdGeneratorInterface $generator;
+    protected $generator;
 
-    protected LoggerInterface $logger;
+    protected $logger;
 
-    protected string $headerName;
+    protected $headerName;
 
     public function __construct(TraceIdGeneratorInterface $generator, LoggerInterface $logger, string $headerName)
     {

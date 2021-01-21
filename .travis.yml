@@ -5,8 +5,17 @@ env:
     - CODECOV_TOKEN=69603dfb-4614-4c46-981d-fea1bf942272
 
 php:
+  - 7.1
+  - 7.2
+  - 7.3
   - 7.4
   - 8.0
+  - nightly
+
+jobs:
+  allow_failures:
+    - php: 7.0
+    - php: nightly
 
 before_script:
   - composer self-update

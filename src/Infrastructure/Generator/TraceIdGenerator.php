@@ -7,9 +7,9 @@ use Vasary\XTraceId\Domain\GUIDGenerator\GUIDGeneratorInterface;
 
 final class TraceIdGenerator implements TraceIdGeneratorInterface
 {
-    private GUIDGeneratorInterface $generator;
+    private $generator;
 
-    private string $traceId;
+    private $traceId;
 
     public function __construct(GUIDGeneratorInterface $generator)
     {
