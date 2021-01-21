@@ -6,7 +6,7 @@ use Vasary\XTraceId\Domain\LoggerProcessor\LoggerProcessorInterface;
 
 final class ApplicationNameProcessor implements LoggerProcessorInterface
 {
-    private string $applicationName;
+    private $applicationName;
 
     public function __construct(string $applicationName)
     {
