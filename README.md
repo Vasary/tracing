@@ -21,3 +21,6 @@ Adds to log message extra data with an additional log level name. Needs for GELF
 
 ### Trace ID processor
 Adds to log message extra data with trace id. All logs will have key extra.trace_id with trace id obtained from the incoming request or generated. (Requestlogger.php)
+
+### Extra parameters processor
+Adds to log message extra data with any key / value pairs in "extra" section
