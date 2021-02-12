@@ -8,7 +8,7 @@ final class ExtraParametersProcessor implements LoggerProcessorInterface
 {
     public const FIELD_NAME = 'extra';
 
-    private array $extraParameters;
+    private $extraParameters;
 
     public function __construct(array $extraParameters = [])
     {
