@@ -7,7 +7,7 @@
     "opentracing"
   ],
   "type": "library",
-  "license": "0BSD",
+  "license": "MIT",
   "authors": [
     {
       "name": "Viktor Gievoi",
