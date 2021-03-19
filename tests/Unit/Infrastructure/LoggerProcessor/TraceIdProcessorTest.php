@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Vasary\XTraceId\Tests\Unit\Infrastructure\LoggerProcessor;
 
 use PHPUnit\Framework\TestCase;
-use Vasary\XTraceId\Domain\Generator\TraceIdGeneratorInterface;
 use Vasary\XTraceId\Domain\LoggerProcessor\LoggerProcessorInterface;
+use Vasary\XTraceId\Domain\Manager\TraceIdManagerInterface;
+use Vasary\XTraceId\Domain\ValueObject\TraceId;
 use Vasary\XTraceId\Infrastructure\LoggerProcessor\TraceIdProcessor;
 
 final class TraceIdProcessorTest extends TestCase
@@ -42,10 +43,10 @@ final class TraceIdProcessorTest extends TestCase
         return new TraceIdProcessor($this->getGeneratorMock(), $generatorFieldName);
     }
 
-    private function getGeneratorMock(): TraceIdGeneratorInterface
+    private function getGeneratorMock(): TraceIdManagerInterface
     {
-        $mock = $this->createMock(TraceIdGeneratorInterface::class);
-        $mock->method('get')->willReturn(self::MY_TEST_TRACE_ID);
+        $mock = $this->createMock(TraceIdManagerInterface::class);
+        $mock->method('get')->willReturn(new TraceId(self::MY_TEST_TRACE_ID));
 
         return $mock;
     }

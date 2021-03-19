@@ -23,10 +23,15 @@ final class ResponseLogger extends AbstractLogger implements ResponseLoggerInter
             return;
         }
 
-        if ($id = $this->generator->get()) {
+        if ($id = $this->manager->get()) {
             $event->getResponse()->headers->set($this->headerName, $id);
         }
 
-        $this->logger->info('Outgoing response: ' . $event->getResponse()->getContent());
+        $headers = $event->getResponse()->headers->all();
+        if (0 === mb_strlen($event->getResponse()->getContent())) {
+            $this->logger->info('Outgoing response body is empty', $headers);
+        } else {
+            $this->logger->info('Outgoing response: ' . $event->getResponse()->getContent(), $headers);
+        }
     }
 }

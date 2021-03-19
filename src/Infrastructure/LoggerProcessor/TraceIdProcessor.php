@@ -2,24 +2,23 @@
 
 namespace Vasary\XTraceId\Infrastructure\LoggerProcessor;
 
-use Vasary\XTraceId\Domain\Generator\TraceIdGeneratorInterface;
 use Vasary\XTraceId\Domain\LoggerProcessor\LoggerProcessorInterface;
+use Vasary\XTraceId\Domain\Manager\TraceIdManagerInterface;
 
 final class TraceIdProcessor implements LoggerProcessorInterface
 {
-    private $generator;
-
+    private $manager;
     private $fieldName;
 
-    public function __construct(TraceIdGeneratorInterface $generator, string $fieldName)
+    public function __construct(TraceIdManagerInterface $manager, string $fieldName)
     {
-        $this->generator = $generator;
+        $this->manager = $manager;
         $this->fieldName = $fieldName;
     }
 
     public function __invoke(array $record): array
     {
-        $record['extra'][$this->fieldName] = $this->generator->get();
+        $record['extra'][$this->fieldName] = $this->manager->get();
 
         return $record;
     }
