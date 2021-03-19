@@ -7,11 +7,10 @@ namespace Vasary\XTraceId\Tests\Unit\Infrastructure\LoggerProcessor;
 use PHPUnit\Framework\TestCase;
 use Vasary\XTraceId\Infrastructure\LoggerProcessor\ExtraParametersProcessor;
 
-
 final class ExtraParametersProcessorTest extends TestCase
 {
     public const TEST_PARAMETERS = [
-        'envaironment' => 'test',
+        'environment' => 'test',
         'some_var' => 'some_value',
     ];
 

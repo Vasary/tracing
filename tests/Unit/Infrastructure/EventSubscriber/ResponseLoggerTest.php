@@ -10,7 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
-use Vasary\XTraceId\Domain\Generator\TraceIdGeneratorInterface;
+use Vasary\XTraceId\Domain\Manager\TraceIdManagerInterface;
+use Vasary\XTraceId\Domain\ValueObject\TraceId;
 use Vasary\XTraceId\Infrastructure\EventSubscriber\ResponseLogger;
 
 final class ResponseLoggerTest extends TestCase
@@ -69,13 +70,13 @@ final class ResponseLoggerTest extends TestCase
         return new ResponseEvent($kernel, $request, $requestType, new Response());
     }
 
-    private function getTraceIdGeneratorMock(int $callCount): TraceIdGeneratorInterface
+    private function getTraceIdGeneratorMock(int $callCount): TraceIdManagerInterface
     {
-        $mock = $this->createMock(TraceIdGeneratorInterface::class);
+        $mock = $this->createMock(TraceIdManagerInterface::class);
         $mock
             ->expects(self::exactly($callCount))
             ->method('get')
-            ->willReturn(self::DEFAULT_TRACE)
+            ->willReturn(new TraceId(self::DEFAULT_TRACE))
         ;
 
         return $mock;

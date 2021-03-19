@@ -28,17 +28,24 @@ final class RequestLogger extends AbstractLogger implements RequestLoggerInterfa
 
         $this->initialize($request);
 
+        $this->logger->info('Incoming request registered');
         $this->logger->info(sprintf('Entrypoint: [%s] %s', $request->getMethod(), $request->getPathInfo()));
-        $this->logger->info('Request: ' . $request->getContent());
+
+        $headers = $event->getRequest()->headers->all();
+        if (0 === mb_strlen($request->getContent())) {
+            $this->logger->info('Request body is empty', $headers);
+        } else {
+            $this->logger->info($request->getContent(), $headers);
+        }
     }
 
     private function initialize(Request $request): void
     {
         if ($id = $request->headers->get($this->headerName)) {
-            $this->generator->set($id);
+            $this->manager->create($id);
             return;
         }
 
-        $request->headers->set($this->headerName, $this->generator->get());
+        $request->headers->set($this->headerName, $this->manager->get());
     }
 }

@@ -5,20 +5,21 @@ declare(strict_types=1);
 namespace Vasary\XTraceId\Tests\Unit\Infrastructure\Generator;
 
 use PHPUnit\Framework\TestCase;
-use Vasary\XTraceId\Domain\Generator\TraceIdGeneratorInterface;
 use Vasary\XTraceId\Domain\GUIDGenerator\GUIDGeneratorInterface;
-use Vasary\XTraceId\Infrastructure\Generator\TraceIdGenerator;
+use Vasary\XTraceId\Domain\Manager\TraceIdManagerInterface;
+use Vasary\XTraceId\Infrastructure\Manager\TraceIdManager;
+use Vasary\XTraceId\Infrastructure\Storage\TraceIdStorage;
 
-final class TraceIdGeneratorTest extends TestCase
+final class TraceIdManagerTest extends TestCase
 {
     /**
      * @test
      */
     public function instanceOf(): void
     {
-        $traceIdGenerator = new TraceIdGenerator($this->getGeneratorMock(1));
+        $manager = new TraceIdManager($this->getGeneratorMock(1), new TraceIdStorage());
 
-        self::assertInstanceOf(TraceIdGeneratorInterface::class, $traceIdGenerator);
+        self::assertInstanceOf(TraceIdManagerInterface::class, $manager);
     }
 
     /**
@@ -26,9 +27,9 @@ final class TraceIdGeneratorTest extends TestCase
      */
     public function exists(): void
     {
-        $traceIdGenerator = new TraceIdGenerator($this->getGeneratorMock(1));
+        $manager = new TraceIdManager($this->getGeneratorMock(1), new TraceIdStorage());
 
-        self::assertNotEmpty($traceIdGenerator->get());
+        self::assertNotEmpty($manager->get());
     }
 
     /**
@@ -36,11 +37,11 @@ final class TraceIdGeneratorTest extends TestCase
      */
     public function set(): void
     {
-        $traceIdGenerator = new TraceIdGenerator($this->getGeneratorMock(1));
+        $manager = new TraceIdManager($this->getGeneratorMock(1), new TraceIdStorage());
 
-        $traceIdGenerator->set('my_trace');
+        $manager->create('my_trace');
 
-        self::assertEquals('my_trace', $traceIdGenerator->get());
+        self::assertEquals('my_trace', $manager->get());
     }
 
     /**
@@ -48,11 +49,11 @@ final class TraceIdGeneratorTest extends TestCase
      */
     public function reset(): void
     {
-        $traceIdGenerator = new TraceIdGenerator($this->getGeneratorMock(2));
+        $manager = new TraceIdManager($this->getGeneratorMock(2), new TraceIdStorage());
 
-        $initiatedTraceId = $traceIdGenerator->get();
-        $traceIdGenerator->reset();
-        $afterResetTraceId = $traceIdGenerator->get();
+        $initiatedTraceId = $manager->get();
+        $manager->reset();
+        $afterResetTraceId = $manager->get();
 
         self::assertNotEmpty($initiatedTraceId);
         self::assertNotEquals($initiatedTraceId, $afterResetTraceId);

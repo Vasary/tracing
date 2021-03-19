@@ -6,21 +6,21 @@
 ## Kit
 
 ### Request logger
-* Set trace id from incoming request or generate new trace id.
-* Log incoming request
+* Sets trace id from the incoming request or generates new trace id
+* Logging incoming request
 
 ### Response logger
-* Add trace id to response
-* Log outgoing response body
+* Adds trace id to the response headers
+* Logs outgoing response body
 
 ### Application name logger processor
-Adds to log message extra data with application name. Needs for GELF.
+Adds to log message extra data with the application name
 
 ### Extra level name logger processor
-Adds to log message extra data with an additional log level name. Needs for GELF.
+Adds to log message extra data with an additional log level name
 
 ### Trace ID processor
-Adds to log message extra data with trace id. All logs will have key extra.trace_id with trace id obtained from the incoming request or generated. (Requestlogger.php)
+Adds to log message extra data with trace id. All logs will have key extra.trace_id with trace id obtained from the incoming request or generated
 
 ### Extra parameters processor
-Adds to log message extra data with any key / value pairs in "extra" section
+Adds to log message extra data with any key/value pairs in the "extra" section

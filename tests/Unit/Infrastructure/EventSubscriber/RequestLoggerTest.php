@@ -9,10 +9,11 @@ use Psr\Log\NullLogger;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
-use Vasary\XTraceId\Domain\Generator\TraceIdGeneratorInterface;
 use Vasary\XTraceId\Domain\GUIDGenerator\GUIDGeneratorInterface;
+use Vasary\XTraceId\Domain\Manager\TraceIdManagerInterface;
 use Vasary\XTraceId\Infrastructure\EventSubscriber\RequestLogger;
-use Vasary\XTraceId\Infrastructure\Generator\TraceIdGenerator;
+use Vasary\XTraceId\Infrastructure\Manager\TraceIdManager;
+use Vasary\XTraceId\Infrastructure\Storage\TraceIdStorage;
 
 final class RequestLoggerTest extends TestCase
 {
@@ -37,8 +38,8 @@ final class RequestLoggerTest extends TestCase
      */
     public function set(): void
     {
-        $generator = $this->getTraceIdGeneratorMock(1);
-        $subscriber = new RequestLogger($generator, new NullLogger(), self::HEADER);
+        $manager = $this->getTraceIdGeneratorMock(1);
+        $subscriber = new RequestLogger($manager, new NullLogger(), self::HEADER);
 
         $event = $this->getRequestEvent(HttpKernelInterface::MASTER_REQUEST);
         $event->getRequest()->headers->set(self::HEADER, self::INCOMING_TRACE);
@@ -46,7 +47,7 @@ final class RequestLoggerTest extends TestCase
         $subscriber->onKernelRequest($event);
 
         self::assertEquals(self::INCOMING_TRACE, $event->getRequest()->headers->get(self::HEADER));
-        self::assertEquals(self::INCOMING_TRACE, $generator->get());
+        self::assertEquals(self::INCOMING_TRACE, $manager->get());
     }
 
     /**
@@ -54,8 +55,8 @@ final class RequestLoggerTest extends TestCase
      */
     public function generated(): void
     {
-        $generator = $this->getTraceIdGeneratorMock(1);
-        $subscriber = new RequestLogger($generator, new NullLogger(), self::HEADER);
+        $manager = $this->getTraceIdGeneratorMock(1);
+        $subscriber = new RequestLogger($manager, new NullLogger(), self::HEADER);
 
         $event = $this->getRequestEvent(HttpKernelInterface::MASTER_REQUEST);
 
@@ -69,8 +70,8 @@ final class RequestLoggerTest extends TestCase
      */
     public function notMasterRequest(): void
     {
-        $generator = $this->getTraceIdGeneratorMock(1);
-        $subscriber = new RequestLogger($generator, new NullLogger(), self::HEADER);
+        $manager = $this->getTraceIdGeneratorMock(1);
+        $subscriber = new RequestLogger($manager, new NullLogger(), self::HEADER);
 
         $event = $this->getRequestEvent(HttpKernelInterface::SUB_REQUEST);
         $subscriber->onKernelRequest($event);
@@ -85,7 +86,7 @@ final class RequestLoggerTest extends TestCase
         return new RequestEvent($kernel, new Request(), $requestType);
     }
 
-    private function getTraceIdGeneratorMock(int $callCount): TraceIdGeneratorInterface
+    private function getTraceIdGeneratorMock(int $callCount): TraceIdManagerInterface
     {
         $mock = $this->createMock(GUIDGeneratorInterface::class);
         $mock
@@ -94,6 +95,6 @@ final class RequestLoggerTest extends TestCase
             ->willReturn(self::DEFAULT_TRACE)
         ;
 
-        return new TraceIdGenerator($mock);
+        return new TraceIdManager($mock, new TraceIdStorage());
     }
 }
